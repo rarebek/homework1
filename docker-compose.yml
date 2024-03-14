@@ -162,14 +162,21 @@ services:
       - db
 
   product_service:
-  container_name: product_service
-  build: ./product_service
-  depends_on: 
-    - "db"
-  ports:
-    - "6000:6000"
-  networks:
-    - db
+    container_name: product_service
+    build: ./product_service
+    depends_on: 
+      - "db"
+    ports:
+      - "6000:6000"
+    networks:
+      - db
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    
 
 networks:
   db:
